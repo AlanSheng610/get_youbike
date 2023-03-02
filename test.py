@@ -38,7 +38,7 @@ tree.heading("#0",text="位置" ) # 图标栏
 tree.heading("#1",text="可借車輛")
 tree.heading("#2",text="可還車輛")
 
-tree.column("#0",anchor= tk.CENTER ,width=300)
+tree.column("#0",anchor= tk.CENTER ,width=500)
 tree.column("#1",anchor= tk.CENTER ,width=300)
 tree.column("#2",anchor= tk.CENTER ,width=300)
 
@@ -48,9 +48,9 @@ tree.insert("",index=tk.END,text="男八舍東側",values=("-1","-1"))
 tree.insert("",index=tk.END,text="男七舍前",values=("-1","-1"))
 
 style = ttk.Style()
-style.configure("Treeview.Heading", font=('黑體', 40)) # 设置标题头的字体
-style.configure("Treeview", font=(None, 40)) # 设置每一行的字体
-style.configure('Treeview',rowheight=60)
+style.configure("Treeview.Heading", font=('黑體', 80)) # 设置标题头的字体
+style.configure("Treeview", font=(None, 80)) # 设置每一行的字体
+style.configure('Treeview',rowheight = 130)
 
 
 b = []
@@ -70,8 +70,7 @@ tree.item('I002',values=(str(b[2]) , str(c[2]) ))
 tree.item('I003',values=(str(b[3]) , str(c[3]) ))
 tree.item('I004',values=(str(b[0]) , str(c[0]) ))
 
-
-# t = '位置           可借        可還'
+t = '最後更新時間：'
 # t1 = '男一舍前：        ' + str(b[1]) +'      ' + str(c[1])
 # t2 = '男六舍前：       ' + str(b[2]) +'      ' + str(c[2])
 # t3 = '男八舍東側：         ' + str(b[3]) +'      ' + str(c[3])
@@ -81,7 +80,7 @@ tree.item('I004',values=(str(b[0]) , str(c[0]) ))
 
 
 
-# label = tk.Label(window , text = t)
+label = tk.Label(window , text = t)
 # label1 = tk.Label(window,                 # 文字標示所在視窗
 #                  text = t1)  # 顯示文字
 # label2 = tk.Label(window,                 # 文字標示所在視窗
@@ -92,7 +91,7 @@ tree.item('I004',values=(str(b[0]) , str(c[0]) ))
 #                  text = t4)  # 顯示文字
 
 # 以預設方式排版標示文字
-# label.pack()
+label.pack()
 # label1.pack()
 # label2.pack()
 # label3.pack()
@@ -109,6 +108,7 @@ def refreshText():
         result = time.localtime(seconds)
         if(result.tm_sec < 20 and result.tm_sec > 15):
             print(result.tm_sec)
+            LRe = '最後更新時間：' + str(result.tm_hour) + ' 時 ' + str(result.tm_min) + ' 分 ' + str(result.tm_sec) + ' 秒 '
             (_b, _c) = getbike()
             break
         else: 
@@ -117,6 +117,7 @@ def refreshText():
     # upt2 = '男六舍前：       ' + str(_b[2]) +'      ' + str(_c[2])
     # upt3 = '男八舍東側：         ' + str(_b[3]) +'      ' + str(_c[3])
     # upt4 = '男七舍前：           ' + str(_b[0]) +'      ' + str(_c[0])
+    label.configure(text=LRe)
     # label1.configure(text=upt1)
     # label2.configure(text=upt2)
     # label3.configure(text=upt3)
@@ -125,7 +126,7 @@ def refreshText():
     tree.item('I002',values=(str(_b[2]) , str(_c[2]) ))
     tree.item('I003',values=(str(_b[3]) , str(_c[3]) ))
     tree.item('I004',values=(str(_b[0]) , str(_c[0]) ))
-    # window.after(1000 , refreshText)
+    window.after(1000 , refreshText)
 
 
 
